@@ -12,22 +12,28 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/images")
 public class ImageController {
 
+    @Autowired
+    ImageService service;
+
     @PostMapping("/create")
     public ResponseEntity<Image> createAndReturn(@RequestBody Blog blog,
                                                  @RequestParam String description,
                                                  @RequestParam String dimensions) {
         Image image = null;
+        image=service.createAndReturn(blog,description,dimensions);
         return new ResponseEntity<>(image, HttpStatus.CREATED);
     }
 
     @GetMapping("/countImagesInScreen/{id}/{screenDimensions}")
     public ResponseEntity<Integer> countImagesInScreen(@PathVariable int id, @PathVariable String screenDimensions){
         int count = 0;
+        //Need to implement confusing...How to calculate dimensions, size...
         return new ResponseEntity<>(count, HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteImage(@PathVariable int id) {
+        service.deleteImage(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
