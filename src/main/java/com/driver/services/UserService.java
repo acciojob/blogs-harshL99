@@ -27,6 +27,7 @@ public class UserService {
     public void updateUser(User user){
         User existingUser=userRepository3.findById(user.getId()).orElse(null);
         if(existingUser!=null){
+            existingUser.setId(existingUser.getId());
             existingUser.setUsername(user.getUsername());
             existingUser.setPassword(user.getPassword());
             existingUser.setFirstName(user.getFirstName());
