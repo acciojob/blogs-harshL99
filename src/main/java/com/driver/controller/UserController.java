@@ -15,25 +15,25 @@ public class UserController {
     @Autowired
     private UserService service;
 
-    @PostMapping("/create")
+    @PostMapping("/createUser")
     public ResponseEntity<Void> createUser(@RequestBody User user) {
         service.createUser(user);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/delete/{userId}")
+    @DeleteMapping("/deleteUser/{userId}")
     public ResponseEntity<Void> deleteUser(@PathVariable int userId) {
         service.deleteUser(userId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PutMapping("/update")
+    @PutMapping("/updateUser")
     public ResponseEntity<Void> updateUser(@RequestBody User user) {
         service.updateUser(user);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping("/find/{username}")
+    @GetMapping("/findUser/{username}")
     public ResponseEntity<User> findUserByUsername(@PathVariable String username) {
         User user=service.findUserByUsername(username);
         return new ResponseEntity<>(user, HttpStatus.OK);

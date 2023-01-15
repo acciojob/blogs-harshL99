@@ -51,6 +51,7 @@ public class BlogService {
         //Updating the userInformation and changing its blogs
         User existingUser=userRepository1.findById(user.getId()).orElse(null);
         if(existingUser!=null){
+            existingUser.setId(existingUser.getId());
             existingUser.setUsername(user.getUsername());
             existingUser.setPassword(user.getPassword());
             existingUser.setFirstName(user.getFirstName());

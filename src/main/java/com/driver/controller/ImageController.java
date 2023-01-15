@@ -15,7 +15,7 @@ public class ImageController {
     @Autowired
     ImageService service;
 
-    @PostMapping("/create")
+    @PostMapping("/createImage")
     public ResponseEntity<Image> createAndReturn(@RequestBody Blog blog,
                                                  @RequestParam String description,
                                                  @RequestParam String dimensions) {
@@ -31,9 +31,9 @@ public class ImageController {
         return new ResponseEntity<>(count, HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteImage(@PathVariable int id) {
-        service.deleteImage(id);
+    @DeleteMapping("/deleteImage")
+    public ResponseEntity<Void> deleteImage(@RequestBody Image image) {
+        service.deleteImage(image);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
