@@ -21,19 +21,17 @@ public class Blog{
 
     }
 
-    public Blog(String title, String content, Date pubDate) {
+    public Blog(String title, String content, Date pubDate,List<Image> imageList) {
         this.title = title;
         this.content = content;
         this.pubDate = pubDate;
+        this.imageList=imageList;
     }
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getTitle() {
         return title;

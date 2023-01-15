@@ -34,7 +34,7 @@ public class BlogService {
     public void createAndReturnBlog(Integer userId, String title, String content) {
         //create a blog at the current time
         Date currentTime=new Date();
-        Blog newBlog=new Blog(title,content,currentTime);
+        Blog newBlog=new Blog(title,content,currentTime,null);
         User user=userRepository1.findById(userId).orElse(null);
         if(user!=null){
             List<Blog> blogList=user.getBlogList();
@@ -51,7 +51,6 @@ public class BlogService {
         //Updating the userInformation and changing its blogs
         User existingUser=userRepository1.findById(user.getId()).orElse(null);
         if(existingUser!=null){
-            existingUser.setId(existingUser.getId());
             existingUser.setUsername(user.getUsername());
             existingUser.setPassword(user.getPassword());
             existingUser.setFirstName(user.getFirstName());

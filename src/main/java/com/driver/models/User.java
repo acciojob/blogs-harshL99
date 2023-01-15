@@ -12,7 +12,7 @@ public class User{
     private String username;
     private String password;
     private String firstName;
-    private String LastName;
+    private String lastName;
 
     @OneToMany(targetEntity = Blog.class,cascade = CascadeType.ALL)
     @JoinColumn(name="userId",referencedColumnName = "id")
@@ -25,7 +25,7 @@ public class User{
         this.username = username;
         this.password = password;
         this.firstName = firstName;
-        this.LastName = lastName;
+        this.lastName = lastName;
         this.blogList = blogList;
     }
 
@@ -33,9 +33,6 @@ public class User{
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getUsername() {
         return username;
@@ -62,11 +59,11 @@ public class User{
     }
 
     public String getLastName() {
-        return LastName;
+        return lastName;
     }
 
     public void setLastName(String lastName) {
-        LastName = lastName;
+        this.lastName = lastName;
     }
 
     public List<Blog> getBlogList() {
