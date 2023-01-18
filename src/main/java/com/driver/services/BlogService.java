@@ -33,48 +33,44 @@ public class BlogService {
 
     public void createAndReturnBlog(Integer userId, String title, String content) {
         //create a blog at the current time
-        Date currentTime=new Date();
-        Blog newBlog=new Blog(title,content,currentTime,null);
-        User user=userRepository1.findById(userId).orElse(null);
-        if(user!=null){
-            List<Blog> blogList=user.getBlogList();
-            blogList.add(newBlog);
-            userRepository1.save(user);
-        }
+        Blog newBlog=new Blog();
+        newBlog.setTitle(title);
+        newBlog.setContent(content);
+        newBlog.setPubDate(new Date());
+
+        User user = userRepository1.findById(userId).get();
+        List<Blog> blogList=user.getBlogList();
+        blogList.add(newBlog);
+        user.setBlogList(blogList);
+
+
+        newBlog.setUser(user);   //Maping with foreign key of child class Blog...
+
+//      userRepository1.save(user);
+
+
         //updating the blog details
-        Blog blog=blogRepository1.findBytitle(title);
-        blog.setTitle(blog.getTitle());
-        blog.setContent(blog.getContent());
-        blog.setPubDate(new Date());
-        blogRepository1.save(blog);
+        blogRepository1.save(newBlog);
 
         //Updating the userInformation and changing its blogs
-        User existingUser=userRepository1.findById(user.getId()).orElse(null);
-        if(existingUser!=null){
-            existingUser.setId(user.getId());
-            existingUser.setUsername(user.getUsername());
-            existingUser.setPassword(user.getPassword());
-            existingUser.setFirstName(user.getFirstName());
-            existingUser.setLastName(user.getLastName());
-            existingUser.setBlogList(null);
-            userRepository1.save(user);
-        }
+        userRepository1.save(user);
+
     }
 
     public Blog findBlogById(int blogId){
         //find a blog
-        return blogRepository1.findById(blogId).orElse(null);
+        return blogRepository1.findById(blogId).get();
     }
 
     public void addImage(Integer blogId, String description, String dimensions){
         //add an image to the blog after creating it
-        Blog blog=blogRepository1.findById(blogId).orElse(null);
-        if(blog!=null){
-            List<Image> imageList=blog.getImageList();
-            Image newImage=new Image(description,dimensions);
-            imageList.add(newImage);
-            blogRepository1.save(blog);
-        }
+        Blog blog=blogRepository1.findById(blogId).get();
+        Image image=imageService1.createAndReturn(blog,description,dimensions);
+        image.setBlog(blog);
+        List<Image> imageList=blog.getImageList();
+        imageList.add(image);
+        blog.setImageList(imageList);
+        blogRepository1.save(blog);
     }
 
     public void deleteBlog(int blogId){

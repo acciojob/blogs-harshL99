@@ -14,8 +14,7 @@ public class User{
     private String firstName;
     private String lastName;
 
-    @OneToMany(targetEntity = Blog.class,cascade = CascadeType.ALL)
-    @JoinColumn(name="userId",referencedColumnName = "id")
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     private List<Blog> blogList;
 
     public User() {

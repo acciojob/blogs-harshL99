@@ -14,8 +14,10 @@ public class Blog{
     private String content;
     private Date pubDate;
 
-    @OneToMany(targetEntity = Image.class,cascade = CascadeType.ALL)
-    @JoinColumn(name="blogId",referencedColumnName = "id")
+    @ManyToOne
+    @JoinColumn
+    private User user;
+    @OneToMany(mappedBy = "blog",cascade = CascadeType.ALL)
     private List<Image> imageList;
     public Blog(){
 
@@ -63,5 +65,13 @@ public class Blog{
 
     public void setImageList(List<Image> imageList) {
         this.imageList = imageList;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
