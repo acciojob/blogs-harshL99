@@ -24,11 +24,10 @@ public class Blog{
 
     }
 
-    public Blog(String title, String content, Date pubDate,List<Image> imageList) {
+    public Blog(String title, String content, Date pubDate) {
         this.title = title;
         this.content = content;
         this.pubDate = pubDate;
-        this.imageList=imageList;
     }
 
     public int getId() {
