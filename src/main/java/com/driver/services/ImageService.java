@@ -19,6 +19,9 @@ public class ImageService {
 
     public Image createAndReturn(Blog blog, String description, String dimensions){
         //create an image based on given parameters and add it to the imageList of given blog
+        int id=blog.getId();
+        if(!blogRepository.existsById(id)) return null;
+
         List<Image> imageList=blog.getImageList();
         Image newImage=new Image(description,dimensions);
         imageList.add(newImage);
