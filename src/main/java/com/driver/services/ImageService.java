@@ -21,6 +21,7 @@ public class ImageService {
         //create an image based on given parameters and add it to the imageList of given blog
 
         List<Image> imageList=blog.getImageList();
+
         Image newImage=new Image(description,dimensions);
         newImage.setBlog(blog);//Adding reference of parent to child for foreign key purpose...
         imageList.add(newImage);
