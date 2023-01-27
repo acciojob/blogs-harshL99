@@ -26,6 +26,10 @@ public class ImageService {
         Image newImage=new Image(description,dimensions);
         imageList.add(newImage);
         newImage.setBlog(blog);//Adding reference of parent to child for foreign key purpose...
+
+        imageRepository2.save(newImage);
+
+        blog.setImageList(imageList);
         blogRepository.save(blog);
         return newImage;
     }
