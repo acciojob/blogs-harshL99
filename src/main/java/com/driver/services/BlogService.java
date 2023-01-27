@@ -39,7 +39,6 @@ public class BlogService {
         newBlog.setPubDate(new Date());
 
         User user = userRepository1.findById(userId).get();
-        if(user==null) return;
 
         List<Blog> blogList=user.getBlogList();
         blogList.add(newBlog);
@@ -50,9 +49,6 @@ public class BlogService {
 
 //      userRepository1.save(user);
 
-
-        //updating the blog details
-        blogRepository1.save(newBlog);
 
         //Updating the userInformation and changing its blogs
         userRepository1.save(user);
@@ -77,6 +73,7 @@ public class BlogService {
 
     public void deleteBlog(int blogId){
         //delete blog and corresponding images
-        blogRepository1.deleteById(blogId);
+        if(blogRepository1.existsById(blogId))
+           blogRepository1.deleteById(blogId);
     }
 }
