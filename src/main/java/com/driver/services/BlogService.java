@@ -39,13 +39,14 @@ public class BlogService {
         newBlog.setPubDate(new Date());
 
         User user = userRepository1.findById(userId).get();
+        newBlog.setUser(user);   //Maping with foreign key of child class Blog...
 
         List<Blog> blogList=user.getBlogList();
         blogList.add(newBlog);
         user.setBlogList(blogList);
 
 
-        newBlog.setUser(user);   //Maping with foreign key of child class Blog...
+
 
 //      userRepository1.save(user);
 
